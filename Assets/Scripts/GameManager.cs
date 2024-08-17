@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Commands;
 using Lucky.Collections;
+using Lucky.Extensions;
 using Lucky.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
@@ -27,14 +29,21 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public TilemapRenderer markTiles;
+    public bool canOperate = true;
+
     private void Start()
     {
         cellNumber = FindObjectsByType<Cell>(FindObjectsSortMode.None).Length;
         Steps = _steps;
+        if (markTiles)
+            markTiles.enabled = false;
     }
 
     private void Update()
     {
+        if (!canOperate)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Menu");
@@ -66,7 +75,11 @@ public class GameManager : Singleton<GameManager>
         if (squares.Count == cellNumber)
         {
             print("win");
-            LevelManager.Instance.LoadNextLevel();
+            canOperate = false;
+            this.CreateFuncTimer(
+                () => { LevelManager.Instance.LoadNextLevel(); },
+                () => 0.5f, isOneShot: true
+            );
         }
     }
 
@@ -235,7 +248,7 @@ public class GameManager : Singleton<GameManager>
             foreach (var sq in tmpVis)
             {
                 Vector3 pos = sq.transform.position;
-                Vector3 pos1, pos2;
+                Vector3 pos1;
                 switch (shrinkDir)
                 {
                     case KeyCode.LeftArrow:

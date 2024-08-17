@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private static List<int> recommendedLevels = new List<int>() { 1, 2, 3 };
+    private static List<int> recommendedLevels = new List<int>() { 1, 2, 3, 4, 5, 8, 9, 11, 12 };
     private static List<int> hardLevels = new List<int>() { };
 
     private void Start()

@@ -328,10 +328,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Fill the grid by placing your block with click
 
-    R: restart
+    R: Restart
 
     Esc:
-    quit
+    Quit
 
     Z: Undo
 
@@ -935,6 +935,7 @@ MonoBehaviour:
   squares: []
   stepsText: {fileID: 1146973856}
   _steps: 4
+  markTiles: {fileID: 0}
 --- !u!4 &1523454594
 Transform:
   m_ObjectHideFlags: 0

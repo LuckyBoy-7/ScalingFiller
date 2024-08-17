@@ -1,3 +1,4 @@
+using System;
 using Commands;
 using Lucky.Extensions;
 using Lucky.Interactive;
@@ -10,6 +11,7 @@ public class Cell : Interactable
     public bool isOccupied => square is not null;
     public Square currentGhostSquare = null;
     public Square square = null;
+
 
     protected override void OnCursorHover()
     {

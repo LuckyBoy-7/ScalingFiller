@@ -25,6 +25,8 @@ public class CommandManager : Singleton<CommandManager>
 
     private void Update()
     {
+        if (!GameManager.Instance.canOperate)
+            return;
         if (Input.GetKeyDown(KeyCode.Z))
             UnDo();
         else if (Input.GetKeyDown(KeyCode.X))
@@ -57,6 +59,7 @@ public class CommandManager : Singleton<CommandManager>
         else
         {
             print("UnDo到底了");
+            return;
         }
 
         GameManager.Instance.Steps += 1;
