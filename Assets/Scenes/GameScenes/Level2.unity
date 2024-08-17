@@ -326,20 +326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Fill the grid by placing your block with click
-
-    R: restart
-
-    Esc:
-    quit
-
-    Z: Undo
-
-    X: Redo
-
-
-
-'
+  m_Text: "You can use \u2191\u2193\u2190\u2192 \nto scale the shape in one axis\n\n\n"
 --- !u!222 &467875517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -934,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squares: []
   stepsText: {fileID: 1146973856}
-  _steps: 4
+  _steps: 3
 --- !u!4 &1523454594
 Transform:
   m_ObjectHideFlags: 0

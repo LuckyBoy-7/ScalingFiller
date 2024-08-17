@@ -15,6 +15,7 @@ public class CommandManager : Singleton<CommandManager>
             commandSequences.Pop(-1);
         commandSequences.Add(new());
         idx += 1;
+        GameManager.Instance.Steps -= 1;
     }
 
     public void AddCommand(ICommand command) => commandSequences[^1].Add(command);
@@ -42,6 +43,7 @@ public class CommandManager : Singleton<CommandManager>
 
         foreach (var command in commandSequences[idx])
             command.Do();
+        GameManager.Instance.Steps -= 1;
     }
 
     private void UnDo()
@@ -56,6 +58,8 @@ public class CommandManager : Singleton<CommandManager>
         {
             print("UnDo到底了");
         }
+
+        GameManager.Instance.Steps += 1;
     }
 
 }

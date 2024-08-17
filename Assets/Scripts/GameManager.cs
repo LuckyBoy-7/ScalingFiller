@@ -5,30 +5,69 @@ using Commands;
 using Lucky.Collections;
 using Lucky.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
     public List<Square> squares = new();
     public const int Unit = 60;
+    private int cellNumber;
+
+    public Text stepsText;
+    public int _steps;
+
+    public int Steps
+    {
+        get => _steps;
+        set
+        {
+            _steps = value;
+            stepsText.text = $"Steps left: {_steps}";
+        }
+    }
+
+    private void Start()
+    {
+        cellNumber = FindObjectsByType<Cell>(FindObjectsSortMode.None).Length;
+        Steps = _steps;
+    }
 
     private void Update()
     {
-        foreach (KeyCode key in new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow })
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(key))
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    Shrink(key);
-                    break;
-                }
-
-                Inflate(key);
-                break;
-            }
+            SceneManager.LoadScene("Menu");
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LevelManager.Instance.Restart();
+        }
+
+        if (Steps > 0)
+            foreach (KeyCode key in new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow })
+            {
+                if (Input.GetKeyDown(key))
+                {
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        Shrink(key);
+                        break;
+                    }
+
+                    Inflate(key);
+                    break;
+                }
+            }
+
         // print(squares.Count);
+
+        if (squares.Count == cellNumber)
+        {
+            print("win");
+            LevelManager.Instance.LoadNextLevel();
+        }
     }
 
     private void Inflate(KeyCode inflateDir)
@@ -262,4 +301,6 @@ public class GameManager : Singleton<GameManager>
 
         #endregion
     }
+
+
 }

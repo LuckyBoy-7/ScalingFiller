@@ -48,19 +48,20 @@ public class Cell : Interactable
     protected override void OnCursorPress()
     {
         base.OnCursorPress();
-        if (isOccupied)
-        {
-            CommandManager.Instance.AddCommandSequence();
-            ICommand command = new RemoveSquareCommand(this);
-            CommandManager.Instance.AddCommand(command);
-            command.Do();
-        }
-        else
-        {
-            CommandManager.Instance.AddCommandSequence();
-            ICommand command = new PutSquareCommand(this);
-            CommandManager.Instance.AddCommand(command);
-            command.Do();
-        }
+        if (GameManager.Instance.Steps > 0)
+            if (isOccupied)
+            {
+                CommandManager.Instance.AddCommandSequence();
+                ICommand command = new RemoveSquareCommand(this);
+                CommandManager.Instance.AddCommand(command);
+                command.Do();
+            }
+            else
+            {
+                CommandManager.Instance.AddCommandSequence();
+                ICommand command = new PutSquareCommand(this);
+                CommandManager.Instance.AddCommand(command);
+                command.Do();
+            }
     }
 }
