@@ -4,16 +4,23 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class PutSquareCommand : ICommand
+    public class RemoveSquareCommand : ICommand
     {
         private Cell cell;
 
-        public PutSquareCommand(Cell cell)
+        public RemoveSquareCommand(Cell cell)
         {
             this.cell = cell;
         }
 
         public void Do()
+        {
+            ObjectPoolManager.Instance.Release(cell.square);
+            GameManager.Instance.squares.Remove(cell.square);
+            cell.square = null;
+        }
+
+        public void UnDo()
         {
             cell.square = ObjectPoolManager.Instance.Get<Square>();
             var sr = cell.square.GetComponent<SpriteRenderer>();
@@ -24,13 +31,6 @@ namespace Commands
 
             ObjectPoolManager.Instance.Release(cell.currentGhostSquare);
             cell.currentGhostSquare = null;
-        }
-
-        public void UnDo()
-        {
-            ObjectPoolManager.Instance.Release(cell.square);
-            GameManager.Instance.squares.Remove(cell.square);
-            cell.square = null;
         }
     }
 }

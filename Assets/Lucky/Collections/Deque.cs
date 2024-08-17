@@ -76,8 +76,7 @@ namespace Lucky.Collections
         {
             if ((front - 1 + capacity) % capacity == back)
             {
-                capacity *= 2;
-                T[] newLst = new T[capacity];
+                T[] newLst = new T[capacity * 2];
                 int i = 1;
                 foreach (var item in this)
                 {
@@ -87,6 +86,7 @@ namespace Lucky.Collections
                 lst = newLst;
                 front = 0;
                 back = i;
+                capacity *= 2;
             }
         }
 

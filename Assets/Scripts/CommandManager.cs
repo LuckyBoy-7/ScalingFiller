@@ -48,8 +48,8 @@ public class CommandManager : Singleton<CommandManager>
     {
         if (idx != -1)
         {
-            foreach (var command in commandSequences[idx])
-                command.UnDo();
+            for (var i = commandSequences[idx].Count - 1; i >= 0; i--)
+                commandSequences[idx][i].UnDo();
             idx -= 1;
         }
         else
