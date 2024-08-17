@@ -20,6 +20,8 @@ namespace Lucky.Managers.ObjectPool_
 
         public void Release<T>(T value) where T : IRecycle
         {
+            if (value == null)
+                return;
             typeToRecycles[typeof(T)].Release(value);
             value.OnRelease();
         }

@@ -15,8 +15,6 @@ namespace Lucky.Managers
                 if (instance == null)
                 {
                     instance = FindObjectOfType<T>();
-                    if (instance)
-                        DontDestroyOnLoad(instance);
                 }
 
                 return instance;
@@ -31,7 +29,6 @@ namespace Lucky.Managers
             if (instance == null)
             {
                 instance = (T)this;
-                DontDestroyOnLoad(instance.gameObject);
             }
             else
                 Destroy(gameObject);

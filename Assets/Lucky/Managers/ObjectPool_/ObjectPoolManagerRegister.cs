@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Lucky.Managers.ObjectPool_
 {
@@ -7,6 +8,7 @@ namespace Lucky.Managers.ObjectPool_
         protected override void Awake()
         {
             base.Awake();
+            typeToRecycles[typeof(Square)] = new(() => Instantiate(Resources.Load<Square>("Square")));
         }
     }
 }
