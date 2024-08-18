@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private static List<int> recommendedLevels = new List<int>() { 1, 2, 3, 4, 5, 8, 9, 11, 12 };
-    private static List<int> hardLevels = new List<int>() { };
+    private static List<int> recommendedLevels = new List<int>() { 1, 2, 3, 4, 5, 8, 9, 11, 12, 13, 16, 17, 18 };
 
     private void Start()
     {
@@ -22,8 +21,6 @@ public class LevelGenerator : MonoBehaviour
             var image = button.GetComponent<Image>();
             if (recommendedLevels.Contains(i))
                 image.color = Color.green;
-            else if (hardLevels.Contains(i))
-                image.color = Color.red;
         }
     }
 }
